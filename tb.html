@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Forgive Me?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffd1dc; /* 更粉嫩的背景色 */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #fff5f7; /* 更柔和的容器背景 */
+            padding: 40px;
+            border-radius: 15px; /* 更圆润的边角 */
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            border: 6px solid #ffb6c1; /* 更粉嫩的边框 */
+            position: relative;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3); /* 添加粉色阴影 */
+        }
+
+        h1 {
+            color: #ff69b4; /* 更亮的粉色标题 */
+            font-size: 2.5rem;
+            margin: 30px 0;
+            text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2); /* 添加文字阴影 */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        button {
+            padding: 12px 45px;
+            background-color: #ffb6c1; /* 更粉嫩的按钮背景 */
+            color: #d4365c; /* 更深的按钮文字颜色 */
+            border: 2px solid #ff69b4; /* 更亮的边框 */
+            border-radius: 10px; /* 更圆润的按钮 */
+            font-size: 18px;
+            font-weight: bold; /* 加粗按钮文字 */
+            cursor: pointer;
+            box-shadow: 0 3px 5px rgba(255, 105, 180, 0.2); /* 添加按钮阴影 */
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffc0cb; /* 悬停时的按钮颜色 */
+            transform: translateY(-2px); /* 悬停时微微上浮 */
+        }
+
+        #yesBtn {
+            transition: transform 0.3s;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        .cat-image {
+            width: 220px; /* 略微放大图片 */
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 15px; /* 圆角图片 */
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3); /* 添加图片阴影 */
+        }
+
+        #screen2, #screen3 {
+            display: none;
+        }
+        
+        /* 添加心形装饰 */
+        .heart-decoration {
+            position: absolute;
+            color: #ffb6c1;
+            font-size: 20px;
+            opacity: 0.6;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加背景装饰 -->
+    <div id="hearts-container"></div>
+
+    <!-- 第一个屏幕：只有No按钮 -->
+    <div id="screen1" class="container">
+        <img src="https://i.pinimg.com/736x/83/66/6f/83666fdc2834c0ce89ac75aa55e7b666.jpg" alt="Sad kitten" class="cat-image">
+        <h1>Đừng như vậy nữa được không?</h1>
+        <div class="buttons">
+            <button id="noBtn1">No</button>
+        </div>
+    </div>
+
+    <!-- 第二个屏幕：有Yes和No按钮，No按钮会逃跑 -->
+    <div id="screen2" class="container">
+        <img src="https://i.pinimg.com/736x/99/95/56/9995564e9aaf2a8c55e3270475bd0bf2.jpg" alt="Sad kitten" class="cat-image">
+        <h1>Ai đó đang rất buồn</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn2" style="position: relative;">No</button>
+        </div>
+    </div>
+
+    <!-- 第三个屏幕：感谢页面 -->
+    <div id="screen3" class="container">
+        <img src="https://i.pinimg.com/736x/c2/aa/61/c2aa616d137f6774ab222d6b30fdceb8.jpg" alt="Happy kitten" class="cat-image">
+        <h1>Anh mong em tha thứ! 💗</h1>
+    </div>
+
+    <script>
+        // 添加装饰性心形到背景
+        function addHearts() {
+            const heartsContainer = document.createElement('div');
+            heartsContainer.style.position = 'fixed';
+            heartsContainer.style.top = '0';
+            heartsContainer.style.left = '0';
+            heartsContainer.style.width = '100%';
+            heartsContainer.style.height = '100%';
+            heartsContainer.style.overflow = 'hidden';
+            heartsContainer.style.zIndex = '-1';
+            document.body.appendChild(heartsContainer);
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '💕';
+                heart.className = 'heart-decoration';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.opacity = Math.random() * 0.5;
+                heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // 在页面加载时添加心形
+        window.addEventListener('load', addHearts);
+
+        // 获取元素
+        const screen1 = document.getElementById('screen1');
+        const screen2 = document.getElementById('screen2');
+        const screen3 = document.getElementById('screen3');
+        const noBtn1 = document.getElementById('noBtn1');
+        const noBtn2 = document.getElementById('noBtn2');
+        const yesBtn = document.getElementById('yesBtn');
+
+        // 点击第一个No按钮，显示第二个屏幕
+        noBtn1.addEventListener('click', function() {
+            screen1.style.display = 'none';
+            screen2.style.display = 'block';
+        });
+
+        // 点击Yes按钮，显示第三个屏幕
+        yesBtn.addEventListener('click', function() {
+            screen2.style.display = 'none';
+            screen3.style.display = 'block';
+        });
+
+        // No按钮逃跑效果
+        function moveNoButton() {
+            // 获取容器尺寸
+            const container = screen2.getBoundingClientRect();
+            
+            // 计算可移动的最大范围（保持按钮在容器内）
+            const maxX = container.width - 140;
+            const maxY = container.height - 60;
+            
+            // 随机生成新位置
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            
+            // 设置新位置
+            noBtn2.style.position = 'absolute';
+            noBtn2.style.left = newX + 'px';
+            noBtn2.style.top = newY + 'px';
+        }
+        
+        // 鼠标悬停时移动
+        noBtn2.addEventListener('mouseover', moveNoButton);
+        
+        // 点击时也移动
+        noBtn2.addEventListener('click', moveNoButton);
+    </script>
+</body>
+</html>
